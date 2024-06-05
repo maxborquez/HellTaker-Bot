@@ -1,21 +1,22 @@
-import csv
 import time
+import csv
 import keyboard
 import tkinter as tk
 import pygetwindow as gw
+import win32gui
 
 def read_key_sequence(file_name):
-    sequence  = []
+    sequence = []
     with open(file_name, newline='') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
             key, time_str = row
-            sequence .append((key, time_str ))
+            sequence.append((key, time_str))
     return sequence
 
-def play_sequence(sequence ):
-    for key, time_str  in sequence :
-        millis = float(time_str ) / 1000
+def play_sequence(sequence):
+    for key, time_str in sequence:
+        millis = float(time_str) / 1000
         print(f"'{key}' - {millis * 1000} milliseconds...")
         keyboard.press(key)
         time.sleep(0.1)
@@ -25,10 +26,11 @@ def play_sequence(sequence ):
 def start_sequence(file_name):
     window = gw.getWindowsWithTitle("Helltaker")
     if window:
-        window[0].activate()
+        hwnd = win32gui.FindWindow(None, window[0].title)
+        win32gui.SetForegroundWindow(hwnd)
         time.sleep(1)
-        sequence  = read_key_sequence(file_name)
-        play_sequence(sequence )
+        sequence = read_key_sequence(file_name)
+        play_sequence(sequence)
     else:
         print("Helltaker window not found.")
 
@@ -41,7 +43,7 @@ def show_buttons(tipo):
         examtaker_button.pack_forget()
 
     if tipo == "HellTaker":
-        botones_info = [
+        buttons_info = [
             ("I", "./data/I.csv"),
             ("II", "./data/II.csv"),
             ("III", "./data/III.csv"),
@@ -54,7 +56,7 @@ def show_buttons(tipo):
             ("Judgement", "./data/Judgement.csv")
         ]
     elif tipo == "ExamTaker":
-        botones_info = [
+        buttons_info = [
             ("I", "./data/EX-I.csv"),
             ("II", "./data/EX-II.csv"),
             ("III", "./data/EX-III.csv"),
@@ -67,7 +69,7 @@ def show_buttons(tipo):
             ("Boss Phase 3", "./data/EXB-3phase.csv")
         ]
 
-    for texto, archivo in botones_info:
+    for texto, archivo in buttons_info:
         boton = tk.Button(window, text=texto, command=lambda archivo=archivo: start_sequence(archivo), bg="#3B3A4F", fg="white")
         boton.pack(pady=5)
         additional_buttons.append(boton)
@@ -86,7 +88,7 @@ def show_home():
 def create_window():
     global window, helltaker_button, examtaker_button, additional_buttons
     window = tk.Tk()
-    window.title("HellTaker-Bot")
+    window.title("HellBot")
     window.geometry("200x150")
     window.configure(bg="#AB333E")
 
