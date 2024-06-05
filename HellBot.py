@@ -35,14 +35,12 @@ def start_sequence(file_name):
         print("Helltaker window not found.")
 
 def show_buttons(tipo):
-    if 'helltaker_button' in globals():
-        window.geometry("200x400")
-        helltaker_button.pack_forget()
-    if 'examtaker_button' in globals():
-        window.geometry("200x400")
-        examtaker_button.pack_forget()
+    global additional_labels
 
     if tipo == "HellTaker":
+        helltaker_button.pack_forget()
+        examtaker_button.pack_forget()
+        window.geometry("240x580")
         buttons_info = [
             ("I", "./data/I.csv"),
             ("II", "./data/II.csv"),
@@ -53,9 +51,16 @@ def show_buttons(tipo):
             ("VII", "./data/VII.csv"),
             ("VIII", "./data/VIII.csv"),
             ("IX", "./data/IX.csv"),
-            ("Judgement", "./data/Judgement.csv")
+            ("Judgement complete", "./data/Judgement.csv"),
+            ("Judgement stage 1", "./data/Judgement-stage1.csv"),
+            ("Judgement stage 2", "./data/Judgement-stage2.csv"),
+            ("Judgement stage 3", "./data/Judgement-stage3.csv"),
+            ("Judgement stage 4", "./data/Judgement-stage4.csv")
         ]
     elif tipo == "ExamTaker":
+        helltaker_button.pack_forget()
+        examtaker_button.pack_forget()
+        window.geometry("240x430")
         buttons_info = [
             ("I", "./data/EX-I.csv"),
             ("II", "./data/EX-II.csv"),
@@ -64,9 +69,9 @@ def show_buttons(tipo):
             ("V", "./data/EX-V.csv"),
             ("VI", "./data/EX-VI.csv"),
             ("Examtaker Boss Complete", "./data/EXB-complete.csv"),
-            ("Boss Phase 1", "./data/EXB-1phase.csv"),
-            ("Boss Phase 2", "./data/EXB-2phase.csv"),
-            ("Boss Phase 3", "./data/EXB-3phase.csv")
+            ("Boss stage 1", "./data/EXB-stage1.csv"),
+            ("Boss stage 2", "./data/EXB-stage2.csv"),
+            ("Boss stage 3", "./data/EXB-stage3.csv")
         ]
 
     for texto, archivo in buttons_info:
@@ -74,19 +79,26 @@ def show_buttons(tipo):
         boton.pack(pady=5)
         additional_buttons.append(boton)
 
+        if texto in ["Judgement complete", "Examtaker Boss Complete"]:
+            label = tk.Label(window, text="Or", bg="#AB333E", fg="white")
+            label.pack()
+            or_labels.append(label)
+
     back_button = tk.Button(window, text="Back", command=show_home, bg="white", fg="black")
     back_button.pack(pady=5)
     additional_buttons.append(back_button)
 
 def show_home():
     for boton in additional_buttons:
-        window.geometry("200x150")
+        window.geometry("240x150")
         boton.pack_forget()
+    for label in or_labels:
+        label.pack_forget()
     helltaker_button.pack(pady=20)
     examtaker_button.pack(pady=20)
 
 def create_window():
-    global window, helltaker_button, examtaker_button, additional_buttons
+    global window, helltaker_button, examtaker_button, additional_buttons, or_labels
     window = tk.Tk()
     window.title("HellBot")
     window.geometry("240x150")
@@ -94,6 +106,7 @@ def create_window():
     window.iconbitmap('./assets/icon.ico')
 
     additional_buttons = []
+    or_labels = []
 
     helltaker_button = tk.Button(window, text="HellTaker", command=lambda: show_buttons("HellTaker"), bg="#3B3A4F", fg="white")
     helltaker_button.pack(pady=20)
