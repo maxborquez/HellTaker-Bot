@@ -89,8 +89,9 @@ def create_window():
     global window, helltaker_button, examtaker_button, additional_buttons
     window = tk.Tk()
     window.title("HellBot")
-    window.geometry("200x150")
+    window.geometry("240x150")
     window.configure(bg="#AB333E")
+    window.iconbitmap('./assets/icon.ico')
 
     additional_buttons = []
 
