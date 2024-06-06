@@ -4,6 +4,9 @@ import keyboard
 import tkinter as tk
 import pygetwindow as gw
 import win32gui
+import threading
+
+stop_sequence = False
 
 def read_key_sequence(file_name):
     sequence = []
@@ -15,13 +18,23 @@ def read_key_sequence(file_name):
     return sequence
 
 def play_sequence(sequence):
-    for key, time_str in sequence:
-        millis = float(time_str) / 1000
-        print(f"'{key}' - {millis * 1000} milliseconds...")
-        keyboard.press(key)
-        time.sleep(0.1)
-        keyboard.release(key)
-        time.sleep(millis)
+    global stop_sequence
+    stop_sequence = False
+
+    def play():
+        global stop_sequence
+        for key, time_str in sequence:
+            if stop_sequence:
+                stop_sequence = False
+                break
+            millis = float(time_str) / 1000
+            print(f"'{key}' - {millis * 1000} milliseconds...")
+            keyboard.press(key)
+            time.sleep(0.1)
+            keyboard.release(key)
+            time.sleep(millis)
+
+    threading.Thread(target=play).start()
 
 def start_sequence(file_name):
     window = gw.getWindowsWithTitle("Helltaker")
@@ -34,13 +47,17 @@ def start_sequence(file_name):
     else:
         print("Helltaker window not found.")
 
+def stop_sequence():
+    global stop_sequence
+    stop_sequence = True
+
 def show_buttons(tipo):
     global additional_labels
 
     if tipo == "HellTaker":
         helltaker_button.pack_forget()
         examtaker_button.pack_forget()
-        window.geometry("240x580")
+        window.geometry("240x600")
         buttons_info = [
             ("I", "./data/I.csv"),
             ("II", "./data/II.csv"),
@@ -60,7 +77,7 @@ def show_buttons(tipo):
     elif tipo == "ExamTaker":
         helltaker_button.pack_forget()
         examtaker_button.pack_forget()
-        window.geometry("240x430")
+        window.geometry("240x450")
         buttons_info = [
             ("I", "./data/EX-I.csv"),
             ("II", "./data/EX-II.csv"),
@@ -87,6 +104,10 @@ def show_buttons(tipo):
     back_button = tk.Button(window, text="Back", command=show_home, bg="white", fg="black")
     back_button.pack(pady=5)
     additional_buttons.append(back_button)
+
+    stop_button = tk.Button(window, text="Stop", command=stop_sequence, bg="red", fg="white")
+    stop_button.pack(pady=5)
+    additional_buttons.append(stop_button)
 
 def show_home():
     for boton in additional_buttons:
