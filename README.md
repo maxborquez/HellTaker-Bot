@@ -2,11 +2,37 @@
 I hated the final boss of the HellTaker DLC (ExamTaker), so I made a bot to destroy it but I ended up making a bot for the whole game.<br><br>
 ## ⚠️ If anyone from the game development team feels offended by this bot, I can remove it.
 
+## Required Libraries
+
+To run this script, it is necessary to install some Python libraries.
+
+### Installation Instructions
+
+1. **Keyboard**: This library is used to detect keyboard events.
+   ```bash
+   pip install keyboard
+
+2. **Pygetwindow**: This library is used to find the window where Helltaker is running.
+   ```bash
+   pip install pygetwindow
+
+3. **Pywin32**: This library is used to focus the Helltaker window and make sure to execute the key sequence in the game.
+   ```bash
+   pip install pywin32
+
+## Compilation
+
+### Run this python command inside the root directory to open the bot 
+```
+ python HellBot.py
+```
+
 # Use
 
 1. Open Helltaker in windowed mode and open the bot. <br>
 2. Start a new game or select a chapter. <br>
-3. At the beginning of the level press the corresponding button and the player will move automatically.<br>
+3. Click on the Helltaker or Examtaker button to see the list of levels and bosses.
+4. At the beginning of the level press the corresponding button and the player will move automatically.<br>
 
   - 📌 **Notice** <br>
     - The bot only solves the puzzles and defeats the bosses, the narrative screens must be played manually <br>(The screen when picking up the Forbiden Lore piece is passed automatically)<br>
