@@ -59,15 +59,15 @@ def show_buttons(tipo):
         examtaker_button.pack_forget()
         window.geometry("240x600")
         buttons_info = [
-            ("I", "./data/I.csv"),
-            ("II", "./data/II.csv"),
-            ("III", "./data/III.csv"),
-            ("IV", "./data/IV.csv"),
-            ("V", "./data/V.csv"),
-            ("VI", "./data/VI.csv"),
-            ("VII", "./data/VII.csv"),
-            ("VIII", "./data/VIII.csv"),
-            ("IX", "./data/IX.csv"),
+            ("        I        ", "./data/I.csv"),
+            ("        II        ", "./data/II.csv"),
+            ("        III        ", "./data/III.csv"),
+            ("        IV        ", "./data/IV.csv"),
+            ("        V        ", "./data/V.csv"),
+            ("        VI        ", "./data/VI.csv"),
+            ("        VII        ", "./data/VII.csv"),
+            ("        VIII        ", "./data/VIII.csv"),
+            ("         IX         ", "./data/IX.csv"),
             ("Judgement complete", "./data/Judgement.csv"),
             ("Judgement stage 1", "./data/Judgement-stage1.csv"),
             ("Judgement stage 2", "./data/Judgement-stage2.csv"),
@@ -79,12 +79,12 @@ def show_buttons(tipo):
         examtaker_button.pack_forget()
         window.geometry("240x450")
         buttons_info = [
-            ("I", "./data/EX-I.csv"),
-            ("II", "./data/EX-II.csv"),
-            ("III", "./data/EX-III.csv"),
-            ("IV", "./data/EX-IV.csv"),
-            ("V", "./data/EX-V.csv"),
-            ("VI", "./data/EX-VI.csv"),
+            ("        I        ", "./data/EX-I.csv"),
+            ("        II        ", "./data/EX-II.csv"),
+            ("        III        ", "./data/EX-III.csv"),
+            ("        IV        ", "./data/EX-IV.csv"),
+            ("        V        ", "./data/EX-V.csv"),
+            ("        VI        ", "./data/EX-VI.csv"),
             ("Examtaker Boss Complete", "./data/EXB-complete.csv"),
             ("Boss stage 1", "./data/EXB-stage1.csv"),
             ("Boss stage 2", "./data/EXB-stage2.csv"),
@@ -101,11 +101,11 @@ def show_buttons(tipo):
             label.pack()
             or_labels.append(label)
 
-    back_button = tk.Button(window, text="Back", command=show_home, bg="white", fg="black")
+    back_button = tk.Button(window, text="      Back      ", command=show_home, bg="white", fg="black")
     back_button.pack(pady=5)
     additional_buttons.append(back_button)
 
-    stop_button = tk.Button(window, text="Stop", command=stop_sequence, bg="red", fg="white")
+    stop_button = tk.Button(window, text="      Stop      ", command=stop_sequence, bg="white", fg="black")
     stop_button.pack(pady=5)
     additional_buttons.append(stop_button)
 

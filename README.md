@@ -11,6 +11,7 @@ I hated the final boss of the HellTaker DLC (ExamTaker), so I made a bot to dest
   - 📌 **Notice** <br>
     - The bot only solves the puzzles and defeats the bosses, the narrative screens must be played manually <br>(The screen when picking up the Forbiden Lore piece is passed automatically)<br>
     - The Judegement or the final boss of Examtaker can be played completely automatically or just one of the stages in case you don't want so much help.
+    - If you decide to press the Judgement Complete button and play all 4 phases in a row automatically, you will miss the plot as it will automatically skip the dialogues.
 
 # GUI images
 
